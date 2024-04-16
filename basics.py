@@ -1,5 +1,11 @@
 import time
 import streamlit as st
+import pandas as pd
+
+# Load the iris dataset
+iris = pd.read_csv(
+    "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+)
 
 # Title
 st.title("Streamlit Basics")
@@ -211,3 +217,77 @@ st.info("Info message")
 st.code('st.info("Info message")')
 st.success("Success message")
 st.code('st.success("Success message")')
+
+st.title("Displaying Data")
+st.markdown("---")
+st.dataframe(iris)
+st.code("st.dataframe(iris)")
+
+
+import plotly.express as px
+
+# Plotting the iris data
+st.title("Scatterplot")
+fig = px.scatter(iris, x="sepal_length", y="sepal_width", color="species")
+st.plotly_chart(fig)
+st.code(
+    """fig = px.scatter(iris, x="sepal_length", y="sepal_width", color="species")"""
+)
+
+# Plotting a histogram using Plotly
+st.title("Histogram")
+fig = px.histogram(iris, x="sepal_length")
+st.plotly_chart(fig)
+st.code("""fig = px.histogram(iris, x="sepal_length")""")
+
+# Plotting a line chart using Plotly
+st.title("Line Chart")
+fig = px.line(iris, x="sepal_length", y="sepal_width", color="species")
+st.plotly_chart(fig)
+st.code("""fig = px.line(iris, x="sepal_length", y="sepal_width", color="species")""")
+
+# Plotting a boxplot using Plotly
+st.title("Boxplot")
+fig = px.box(iris, x="species", y="sepal_width")
+st.plotly_chart(fig)
+st.code("""fig = px.box(iris, x="species", y="sepal_width")""")
+
+# Plotting a bar chart using Plotly
+st.title("Bar Chart")
+fig = px.bar(iris, x="species", y="sepal_length")
+st.plotly_chart(fig)
+st.code("""fig = px.bar(iris, x="species", y="sepal_length")""")
+
+# Plotting a scatter matrix using Plotly
+st.title("Scatter Matrix")
+fig = px.scatter_matrix(
+    iris,
+    dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"],
+    color="species",
+)
+st.plotly_chart(fig)
+st.code(
+    """fig = px.scatter_matrix(iris, dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"], color="species")"""
+)
+
+# Plotting a 3D scatter plot using Plotly
+st.title("3D Scatter Plot")
+fig = px.scatter_3d(
+    iris, x="sepal_length", y="sepal_width", z="petal_length", color="species"
+)
+st.plotly_chart(fig)
+st.code(
+    """fig = px.scatter_3d(iris, x="sepal_length", y="sepal_width", z="petal_length", color="species")"""
+)
+
+# Plotting a heatmap using Plotly
+st.title("Heatmap")
+fig = px.imshow(iris.corr())
+st.plotly_chart(fig)
+st.code("""fig = px.imshow(iris.corr())""")
+
+# Plotting a pie chart using Plotly
+st.title("Pie Chart")
+fig = px.pie(iris, names="species")
+st.plotly_chart(fig)
+st.code("""fig = px.pie(iris, names="species")""")
